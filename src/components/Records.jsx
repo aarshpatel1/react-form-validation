@@ -12,6 +12,7 @@ function Records({ usersList }) {
 							<th scope="col">Email</th>
 							<th scope="col">Password</th>
 							<th scope="col">Address</th>
+							<th scope="col">State</th>
 							<th scope="col">Zip Code</th>
 							<th scope="col">Hobbies</th>
 						</tr>
@@ -19,7 +20,7 @@ function Records({ usersList }) {
 					<tbody>
 						{usersList.length === 0 ? (
 							<tr>
-								<td colSpan="8" className="text-center">
+								<td colSpan="9" className="text-center">
 									No Records Found
 								</td>
 							</tr>
@@ -32,8 +33,17 @@ function Records({ usersList }) {
 									<td>{user.email}</td>
 									<td>{user.password}</td>
 									<td>{user.address}</td>
-									<td>{user.zipCode}</td>
-									<td>{user.hobbies}</td>
+									<td>{user.state}</td>
+									<td>{user.zip}</td>
+									<td>
+										{Array.isArray(user.hobbies)
+											? user.hobbies.map((hobby, index) => (
+													<span key={index} className="badge bg-primary me-2">
+														{hobby}
+													</span>
+											  ))
+											: "No hobbies"}
+									</td>
 								</tr>
 							))
 						)}
