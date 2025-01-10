@@ -67,6 +67,7 @@ function Form() {
 										name="gender"
 										id="male"
 										value="male"
+										checked={user.gender === "male"}
 									/>
 									<label className="form-check-label" htmlFor="male">
 										Male
@@ -80,6 +81,7 @@ function Form() {
 										name="gender"
 										id="female"
 										value="female"
+										checked={user.gender === "female"}
 									/>
 									<label className="form-check-label" htmlFor="female">
 										Female
@@ -182,6 +184,7 @@ function Form() {
 											id="cricket"
 											name="hobbies"
 											value="cricket"
+											checked={user.hobbies?.includes("cricket") || false}
 										/>
 										<label className="form-check-label" htmlFor="cricket">
 											Cricket
@@ -197,6 +200,7 @@ function Form() {
 											id="chess"
 											name="hobbies"
 											value="chess"
+											checked={user.hobbies?.includes("chess") || false}
 										/>
 										<label className="form-check-label" htmlFor="chess">
 											Chess
@@ -212,6 +216,7 @@ function Form() {
 											id="volleyball"
 											name="hobbies"
 											value="volleyball"
+											checked={user.hobbies?.includes("volleyball") || false}
 										/>
 										<label className="form-check-label" htmlFor="volleyball">
 											Volley Ball
@@ -227,6 +232,7 @@ function Form() {
 											id="coding"
 											name="hobbies"
 											value="coding"
+											checked={user.hobbies?.includes("coding") || false}
 										/>
 										<label className="form-check-label" htmlFor="coding">
 											Coding
