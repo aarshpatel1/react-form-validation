@@ -38,7 +38,10 @@ function Records({ usersList }) {
 									<td>
 										{Array.isArray(user.hobbies)
 											? user.hobbies.map((hobby, index) => (
-													<span key={index} className="badge bg-primary me-2">
+													<span
+														key={index}
+														className="badge bg-secondary-subtle me-2"
+													>
 														{hobby}
 													</span>
 											  ))

@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Records from "./Records.Jsx";
 
 function Form() {
-	const [user, setUser] = useState({});
-	const [usersList, setUsersList] = useState([]);
-	const [hobbies, setHobbies] = useState([]);
+	const [user, setUser] = useState(
+		JSON.parse(localStorage.getItem("user")) || {}
+	);
+
+	const [usersList, setUsersList] = useState(
+		JSON.parse(localStorage.getItem("usersList")) || []
+	);
+
+	useEffect(() => {
+		localStorage.setItem("user", JSON.stringify(user));
+		localStorage.setItem("usersList", JSON.stringify(usersList));
+	}, [user, usersList]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -12,14 +21,11 @@ function Form() {
 	};
 
 	const handleCheckboxChange = (e) => {
-		const { name, value } = e.target;
-		if (e.target.checked) {
-			setHobbies([...hobbies, value]);
-			console.log(hobbies);
-		} else {
-			setHobbies(hobbies.filter((hobby) => hobby !== value));
-			console.log(hobbies);
-		}
+		const { value } = e.target;
+		const updatedHobbies = e.target.checked
+			? [...(user.hobbies || []), value]
+			: (user.hobbies || []).filter((hobby) => hobby !== value);
+		setUser({ ...user, hobbies: updatedHobbies });
 	};
 
 	const handleFormSubmit = (e) => {
