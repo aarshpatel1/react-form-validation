@@ -137,21 +137,21 @@ function Form() {
 								id="inputState"
 								className="form-select"
 								name="state"
-								defaultChecked="None"
+								value={user.state || "None"}
 								onChange={handleChange}
 							>
 								<option value="None">Choose City...</option>
 								{[
-									"New York",
-									"Tokyo",
-									"Paris",
-									"London",
-									"Sydney",
-									"Mumbai",
-									"Rio de Janeiro",
-									"Cape Town",
-									"Moscow",
-									"Toronto",
+									"Gujarat",
+									"Maharashtra",
+									"Rajasthan",
+									"Kerala",
+									"Tamil Nadu",
+									"Uttar Pradesh",
+									"Bihar",
+									"Karnataka",
+									"West Bengal",
+									"Punjab",
 								].map((state, index) => (
 									<option key={index} value={state}>
 										{state}
