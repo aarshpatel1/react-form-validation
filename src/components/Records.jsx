@@ -1,9 +1,14 @@
+import DataTable from "datatables.net-react";
+import DT from "datatables.net-bs5";
+
+DataTable.use(DT);
+
 function Records({ usersList }) {
 	return (
 		<>
 			<div className="container">
 				<h2 className="text-center my-5">User Records</h2>
-				<table className="table table-hover my-5">
+				<DataTable key={usersList} className="table table-hover my-5">
 					<thead>
 						<tr>
 							<th scope="col">#</th>
@@ -18,40 +23,32 @@ function Records({ usersList }) {
 						</tr>
 					</thead>
 					<tbody>
-						{usersList.length === 0 ? (
-							<tr>
-								<td colSpan="9" className="text-center">
-									No Records Found
+						{usersList.map((user, index) => (
+							<tr key={index}>
+								<th scope="row">{index + 1}</th>
+								<td>{user.name}</td>
+								<td>{user.gender}</td>
+								<td>{user.email}</td>
+								<td>{user.password}</td>
+								<td>{user.address}</td>
+								<td>{user.state}</td>
+								<td>{user.zip}</td>
+								<td>
+									{Array.isArray(user.hobbies)
+										? user.hobbies.map((hobby, index) => (
+												<span
+													key={index}
+													className="badge bg-secondary-subtle me-2"
+												>
+													{hobby}
+												</span>
+										  ))
+										: "No hobbies"}
 								</td>
 							</tr>
-						) : (
-							usersList.map((user, index) => (
-								<tr key={index}>
-									<th scope="row">{index + 1}</th>
-									<td>{user.name}</td>
-									<td>{user.gender}</td>
-									<td>{user.email}</td>
-									<td>{user.password}</td>
-									<td>{user.address}</td>
-									<td>{user.state}</td>
-									<td>{user.zip}</td>
-									<td>
-										{Array.isArray(user.hobbies)
-											? user.hobbies.map((hobby, index) => (
-													<span
-														key={index}
-														className="badge bg-secondary-subtle me-2"
-													>
-														{hobby}
-													</span>
-											  ))
-											: "No hobbies"}
-									</td>
-								</tr>
-							))
-						)}
+						))}
 					</tbody>
-				</table>
+				</DataTable>
 			</div>
 		</>
 	);
