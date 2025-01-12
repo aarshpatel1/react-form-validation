@@ -1,9 +1,11 @@
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-bs5";
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 
 DataTable.use(DT);
 
-function Records({ usersList }) {
+function Records({ usersList, handleDelete, handleEdit }) {
 	return (
 		<>
 			<div className="container">
@@ -20,6 +22,7 @@ function Records({ usersList }) {
 							<th scope="col">State</th>
 							<th scope="col">Zip Code</th>
 							<th scope="col">Hobbies</th>
+							<th scope="col">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,6 +47,22 @@ function Records({ usersList }) {
 												</span>
 										  ))
 										: "No hobbies"}
+								</td>
+								<td>
+									<div className="d-flex align-items-center">
+										<button
+											className="btn btn-primary"
+											onClick={() => handleEdit(index)}
+										>
+											<MdEdit />
+										</button>
+										<button
+											className="btn btn-danger ms-2"
+											onClick={() => handleDelete(index)}
+										>
+											<MdDelete />
+										</button>
+									</div>
 								</td>
 							</tr>
 						))}

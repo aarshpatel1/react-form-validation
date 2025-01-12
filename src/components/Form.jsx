@@ -34,6 +34,11 @@ function Form() {
 		setUser({});
 	};
 
+	const handleDelete = (index) => {
+		const updatedUsersList = usersList.filter((_, i) => i !== index);
+		setUsersList(updatedUsersList);
+	};
+
 	return (
 		<>
 			<section className="vh-100 d-flex justify-content-center align-items-center">
@@ -249,7 +254,11 @@ function Form() {
 					</form>
 				</div>
 			</section>
-			<Records usersList={usersList} />
+			<Records
+				usersList={usersList}
+				handleDelete={handleDelete}
+				handleEdit={handleEdit}
+			/>
 		</>
 	);
 }
