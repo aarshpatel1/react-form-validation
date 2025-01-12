@@ -3,7 +3,8 @@ import Records from "./Records.Jsx";
 
 function Form() {
 	const [user, setUser] = useState({});
-
+	const [editUser, setEditUser] = useState(null);
+	const [errors, setErrors] = useState({});
 	const [usersList, setUsersList] = useState(
 		JSON.parse(localStorage.getItem("usersList")) || []
 	);
@@ -27,13 +28,50 @@ function Form() {
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		setUsersList([...usersList, user]);
+		if (!validation()) return;
+		if (editUser === null) {
+			setUsersList([...usersList, { ...user, id: Date.now() }]);
+		} else {
+			const updatedUsersList = usersList.map((oldUser) =>
+				oldUser.id === editUser ? { ...user, id: editUser } : oldUser
+			);
+			setUsersList(updatedUsersList);
+			setEditUser(null);
+		}
 		setUser({});
 	};
 
-	const handleDelete = (index) => {
-		const updatedUsersList = usersList.filter((_, i) => i !== index);
-		setUsersList(updatedUsersList);
+	const handleDelete = (id) => {
+		const updateUsersList = usersList.filter((user) => user.id !== id);
+		setUsersList(updateUsersList);
+	};
+
+	const handleEdit = (id) => {
+		const updateUser = usersList.find((user) => user.id === id);
+		setEditUser(id);
+		setUser(updateUser);
+	};
+
+	const validation = () => {
+		let errors = {};
+		const pattern =
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+		if (!user.name) errors.name = "Name is required";
+		if (!user.gender) errors.gender = "Gender is required";
+		if (!user.email) errors.email = "Email is required";
+		if (user.email && !user.email.includes("@")) errors.email = "Invalid email";
+		if (!user.password) errors.password = "Password is required";
+		if (user.password && !pattern.test(user.password))
+			errors.password =
+				"Password must contain at least 8 characters, including uppercase, lowercase letters, numbers and special characters";
+		if (!user.address) errors.address = "Address is required";
+		if (!user.state) errors.state = "State is required";
+		if (!user.zip) errors.zip = "Zip is required";
+		if (!user.hobbies) errors.hobbies = "Hobbies is required";
+
+		setErrors(errors);
+		return Object.keys(errors).length === 0;
 	};
 
 	return (
@@ -57,6 +95,9 @@ function Form() {
 								className="form-control"
 								id="name"
 							/>
+							{errors.name && (
+								<div className="invalid-feedback">{errors.name}</div>
+							)}
 						</div>
 						<div className="col-md-6">
 							<label htmlFor="gender">Gender: </label>
@@ -74,6 +115,9 @@ function Form() {
 									<label className="form-check-label" htmlFor="male">
 										Male
 									</label>
+									{errors.gender && (
+										<div className="invalid-feedback">{errors.name}</div>
+									)}
 								</div>
 								<div className="form-check ms-4 py-3">
 									<input
@@ -88,6 +132,9 @@ function Form() {
 									<label className="form-check-label" htmlFor="female">
 										Female
 									</label>
+									{errors.gender && (
+										<div className="invalid-feedback">{errors.name}</div>
+									)}
 								</div>
 							</div>
 						</div>
@@ -104,6 +151,9 @@ function Form() {
 								value={user.email || ""}
 								placeholder="example@xyz.com"
 							/>
+							{errors.email && (
+								<div className="invalid-feedback">{errors.email}</div>
+							)}
 						</div>
 						<div className="col-md-6">
 							<label htmlFor="password" className="form-label">
@@ -118,6 +168,9 @@ function Form() {
 								placeholder="At least 8 characters"
 								value={user.password || ""}
 							/>
+							{errors.password && (
+								<div className="invalid-feedback">{errors.password}</div>
+							)}
 						</div>
 						<div className="col-12">
 							<label htmlFor="inputAddress" className="form-label">
@@ -130,6 +183,9 @@ function Form() {
 								onChange={handleChange}
 								value={user.address || ""}
 							></textarea>
+							{errors.address && (
+								<div className="invalid-feedback">{errors.address}</div>
+							)}
 						</div>
 						<div className="col-md-8">
 							<label htmlFor="inputState" className="form-label">
@@ -160,6 +216,9 @@ function Form() {
 									</option>
 								))}
 							</select>
+							{errors.state && (
+								<div className="invalid-feedback">{errors.state}</div>
+							)}
 						</div>
 						<div className="col-md-4">
 							<label htmlFor="zip" className="form-label">
@@ -173,6 +232,9 @@ function Form() {
 								name="zip"
 								value={user.zip || ""}
 							/>
+							{errors.zip && (
+								<div className="invalid-feedback">{errors.zip}</div>
+							)}
 						</div>
 						<div className="col-12">
 							<h2 className="h6 my-3">Hobbies</h2>
@@ -191,6 +253,9 @@ function Form() {
 										<label className="form-check-label" htmlFor="cricket">
 											Cricket
 										</label>
+										{errors.hobbies && (
+											<div className="invalid-feedback">{errors.hobbies}</div>
+										)}
 									</div>
 								</div>
 								<div className="col-md-3 col-6">
@@ -207,6 +272,9 @@ function Form() {
 										<label className="form-check-label" htmlFor="chess">
 											Chess
 										</label>
+										{errors.hobbies && (
+											<div className="invalid-feedback">{errors.hobbies}</div>
+										)}
 									</div>
 								</div>
 								<div className="col-md-3 col-6">
@@ -223,6 +291,9 @@ function Form() {
 										<label className="form-check-label" htmlFor="volleyball">
 											Volley Ball
 										</label>
+										{errors.hobbies && (
+											<div className="invalid-feedback">{errors.hobbies}</div>
+										)}
 									</div>
 								</div>
 								<div className="col-md-3 col-6">
@@ -239,6 +310,9 @@ function Form() {
 										<label className="form-check-label" htmlFor="coding">
 											Coding
 										</label>
+										{errors.hobbies && (
+											<div className="invalid-feedback">{errors.hobbies}</div>
+										)}
 									</div>
 								</div>
 							</div>
@@ -251,7 +325,11 @@ function Form() {
 					</form>
 				</div>
 			</section>
-			<Records usersList={usersList} />
+			<Records
+				usersList={usersList}
+				handleDelete={handleDelete}
+				handleEdit={handleEdit}
+			/>
 		</>
 	);
 }
