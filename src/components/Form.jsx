@@ -254,11 +254,7 @@ function Form() {
 					</form>
 				</div>
 			</section>
-			<Records
-				usersList={usersList}
-				handleDelete={handleDelete}
-				handleEdit={handleEdit}
-			/>
+			<Records usersList={usersList} />
 		</>
 	);
 }

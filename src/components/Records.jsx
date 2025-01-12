@@ -5,7 +5,7 @@ import { MdEdit } from "react-icons/md";
 
 DataTable.use(DT);
 
-function Records({ usersList, handleDelete, handleEdit }) {
+function Records({ usersList }) {
 	return (
 		<>
 			<div className="container">
@@ -50,16 +50,10 @@ function Records({ usersList, handleDelete, handleEdit }) {
 								</td>
 								<td>
 									<div className="d-flex align-items-center">
-										<button
-											className="btn btn-primary"
-											onClick={() => handleEdit(index)}
-										>
+										<button className="btn btn-primary">
 											<MdEdit />
 										</button>
-										<button
-											className="btn btn-danger ms-2"
-											onClick={() => handleDelete(index)}
-										>
+										<button className="btn btn-danger ms-2">
 											<MdDelete />
 										</button>
 									</div>
