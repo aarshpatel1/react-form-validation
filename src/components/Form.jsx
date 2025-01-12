@@ -2,18 +2,15 @@ import { useEffect, useState } from "react";
 import Records from "./Records.Jsx";
 
 function Form() {
-	const [user, setUser] = useState(
-		JSON.parse(localStorage.getItem("user")) || {}
-	);
+	const [user, setUser] = useState({});
 
 	const [usersList, setUsersList] = useState(
 		JSON.parse(localStorage.getItem("usersList")) || []
 	);
 
 	useEffect(() => {
-		localStorage.setItem("user", JSON.stringify(user));
 		localStorage.setItem("usersList", JSON.stringify(usersList));
-	}, [user, usersList]);
+	}, [usersList]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
