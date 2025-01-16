@@ -5,7 +5,7 @@ import { MdEdit } from "react-icons/md";
 
 DataTable.use(DT);
 
-function Records({ usersList, handleDelete }) {
+function Records({ usersList, handleDelete, handleEdit }) {
 	return (
 		<>
 			<div className="container">

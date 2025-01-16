@@ -95,9 +95,7 @@ function Form() {
 								className="form-control"
 								id="name"
 							/>
-							{errors.name && (
-								<div className="invalid-feedback">{errors.name}</div>
-							)}
+							{errors.name && <div className="text-danger">{errors.name}</div>}
 						</div>
 						<div className="col-md-6">
 							<label htmlFor="gender">Gender: </label>
