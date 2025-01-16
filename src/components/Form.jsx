@@ -92,10 +92,10 @@ function Form() {
 								onChange={handleChange}
 								value={user.name || ""}
 								type="text"
-								className="form-control"
+								className={`form-control ${errors.name ? "is-invalid" : ""}`}
 								id="name"
+								placeholder={errors.name}
 							/>
-							{errors.name && <div className="text-danger">{errors.name}</div>}
 						</div>
 						<div className="col-md-6">
 							<label htmlFor="gender">Gender: </label>
@@ -103,7 +103,9 @@ function Form() {
 								<div className="form-check py-3">
 									<input
 										onChange={handleChange}
-										className="form-check-input"
+										className={`form-check-input ${
+											errors.gender ? "is-invalid" : ""
+										}`}
 										type="radio"
 										name="gender"
 										id="male"
@@ -113,14 +115,13 @@ function Form() {
 									<label className="form-check-label" htmlFor="male">
 										Male
 									</label>
-									{errors.gender && (
-										<div className="invalid-feedback">{errors.name}</div>
-									)}
 								</div>
 								<div className="form-check ms-4 py-3">
 									<input
 										onChange={handleChange}
-										className="form-check-input"
+										className={`form-check-input ${
+											errors.gender ? "is-invalid" : ""
+										}`}
 										type="radio"
 										name="gender"
 										id="female"
@@ -130,9 +131,6 @@ function Form() {
 									<label className="form-check-label" htmlFor="female">
 										Female
 									</label>
-									{errors.gender && (
-										<div className="invalid-feedback">{errors.name}</div>
-									)}
 								</div>
 							</div>
 						</div>
@@ -144,14 +142,11 @@ function Form() {
 								name="email"
 								onChange={handleChange}
 								type="email"
-								className="form-control"
+								className={`form-control ${errors.email ? "is-invalid" : ""}`}
 								id="email"
 								value={user.email || ""}
 								placeholder="example@xyz.com"
 							/>
-							{errors.email && (
-								<div className="invalid-feedback">{errors.email}</div>
-							)}
 						</div>
 						<div className="col-md-6">
 							<label htmlFor="password" className="form-label">
@@ -161,29 +156,25 @@ function Form() {
 								name="password"
 								onChange={handleChange}
 								type="password"
-								className="form-control"
+								className={`form-control ${
+									errors.password ? "is-invalid" : ""
+								}`}
 								id="password"
 								placeholder="At least 8 characters"
 								value={user.password || ""}
 							/>
-							{errors.password && (
-								<div className="invalid-feedback">{errors.password}</div>
-							)}
 						</div>
 						<div className="col-12">
 							<label htmlFor="inputAddress" className="form-label">
 								Address
 							</label>
 							<textarea
-								className="form-control"
 								id="inputAddress"
 								name="address"
+								className={`form-control ${errors.address ? "is-invalid" : ""}`}
 								onChange={handleChange}
 								value={user.address || ""}
 							></textarea>
-							{errors.address && (
-								<div className="invalid-feedback">{errors.address}</div>
-							)}
 						</div>
 						<div className="col-md-8">
 							<label htmlFor="inputState" className="form-label">
@@ -191,8 +182,8 @@ function Form() {
 							</label>
 							<select
 								id="inputState"
-								className="form-select"
 								name="state"
+								className={`form-select ${errors.state ? "is-invalid" : ""}`}
 								value={user.state || "None"}
 								onChange={handleChange}
 							>
@@ -214,9 +205,6 @@ function Form() {
 									</option>
 								))}
 							</select>
-							{errors.state && (
-								<div className="invalid-feedback">{errors.state}</div>
-							)}
 						</div>
 						<div className="col-md-4">
 							<label htmlFor="zip" className="form-label">
@@ -225,14 +213,11 @@ function Form() {
 							<input
 								type="text"
 								onChange={handleChange}
-								className="form-control"
 								id="zip"
 								name="zip"
+								className={`form-control ${errors.zip ? "is-invalid" : ""}`}
 								value={user.zip || ""}
 							/>
-							{errors.zip && (
-								<div className="invalid-feedback">{errors.zip}</div>
-							)}
 						</div>
 						<div className="col-12">
 							<h2 className="h6 my-3">Hobbies</h2>
@@ -241,7 +226,9 @@ function Form() {
 									<div className="form-check">
 										<input
 											onChange={handleCheckboxChange}
-											className="form-check-input"
+											className={`form-check-input ${
+												errors.hobbies ? "is-invalid" : ""
+											}`}
 											type="checkbox"
 											id="cricket"
 											name="hobbies"
@@ -251,16 +238,15 @@ function Form() {
 										<label className="form-check-label" htmlFor="cricket">
 											Cricket
 										</label>
-										{errors.hobbies && (
-											<div className="invalid-feedback">{errors.hobbies}</div>
-										)}
 									</div>
 								</div>
 								<div className="col-md-3 col-6">
 									<div className="form-check">
 										<input
 											onChange={handleCheckboxChange}
-											className="form-check-input"
+											className={`form-check-input ${
+												errors.hobbies ? "is-invalid" : ""
+											}`}
 											type="checkbox"
 											id="chess"
 											name="hobbies"
@@ -270,16 +256,15 @@ function Form() {
 										<label className="form-check-label" htmlFor="chess">
 											Chess
 										</label>
-										{errors.hobbies && (
-											<div className="invalid-feedback">{errors.hobbies}</div>
-										)}
 									</div>
 								</div>
 								<div className="col-md-3 col-6">
 									<div className="form-check">
 										<input
 											onChange={handleCheckboxChange}
-											className="form-check-input"
+											className={`form-check-input ${
+												errors.hobbies ? "is-invalid" : ""
+											}`}
 											type="checkbox"
 											id="volleyball"
 											name="hobbies"
@@ -289,16 +274,15 @@ function Form() {
 										<label className="form-check-label" htmlFor="volleyball">
 											Volley Ball
 										</label>
-										{errors.hobbies && (
-											<div className="invalid-feedback">{errors.hobbies}</div>
-										)}
 									</div>
 								</div>
 								<div className="col-md-3 col-6">
 									<div className="form-check">
 										<input
 											onChange={handleCheckboxChange}
-											className="form-check-input"
+											className={`form-check-input ${
+												errors.hobbies ? "is-invalid" : ""
+											}`}
 											type="checkbox"
 											id="coding"
 											name="hobbies"
@@ -308,9 +292,6 @@ function Form() {
 										<label className="form-check-label" htmlFor="coding">
 											Coding
 										</label>
-										{errors.hobbies && (
-											<div className="invalid-feedback">{errors.hobbies}</div>
-										)}
 									</div>
 								</div>
 							</div>
