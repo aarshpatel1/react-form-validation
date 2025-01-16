@@ -14,16 +14,25 @@ function Form() {
 	}, [usersList]);
 
 	const handleChange = (e) => {
-		const { name, value } = e.target;
+		const { name, value, classList } = e.target;
 		setUser({ ...user, [name]: value });
+		if (classList.contains("is-invalid")) {
+			classList.remove("is-invalid");
+			classList.add("is-valid");
+		}
 	};
 
 	const handleCheckboxChange = (e) => {
-		const { value } = e.target;
-		const updatedHobbies = e.target.checked
+		const { value, checked, classList } = e.target;
+		const updatedHobbies = checked
 			? [...(user.hobbies || []), value]
 			: (user.hobbies || []).filter((hobby) => hobby !== value);
 		setUser({ ...user, hobbies: updatedHobbies });
+
+		if (classList.contains("is-invalid")) {
+			classList.remove("is-invalid");
+			classList.add("is-valid");
+		}
 	};
 
 	const handleFormSubmit = (e) => {
